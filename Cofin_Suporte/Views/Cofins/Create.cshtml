@@ -1,0 +1,98 @@
+﻿@model Cofin_Suporte.Models.Cofin
+@{
+    ViewData["Title"] = "";
+}
+
+<h4>Bug</h4>
+<hr />
+<div>
+    <form asp-action="Create" asp-controller="Cofins"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-success="Success"
+          data-ajax-failure="Failure">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Descrição Bug</label>
+                    <input asp-for="Descricao" class="form-control" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Assunto</label>
+                    <input asp-for="Assunto" class="form-control" />
+                    <span asp-validation-for="Assunto" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Data Bug</label>
+                    <input asp-for="Data" class="form-control" />
+                    <span asp-validation-for="Data" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Observação</label>
+                    <input asp-for="Observacao" class="form-control" />
+                    <span asp-validation-for="Observacao" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row">
+
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Tipo Bug</label>
+                    <select asp-for="IdTipo" class="form-control" asp-items="ViewBag.IdTipo"></select>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Categoria Bug</label>
+                    <select asp-for="IdCategoria" class="form-control" asp-items="ViewBag.IdCategoria"></select>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Backlog</label>
+                    <select asp-for="IdBacklog" class="form-control" asp-items="ViewBag.IdBacklog"></select>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Solução Bug (Ctrl + Click)</label>
+                    <br>
+                    @*@{var i = 0;
+                        foreach (var item in Model.CofinSolucao)
+                        {
+                        <input type="checkbox" name="Solution" id="Solution[@i]" value="@item.IdSolucao" />
+                        @Html.Label(item.IdSolucaoNavigation.DescricaoSolução)
+
+                        i++;
+                        }
+                        }*@
+                    <select asp-for="Solution" class="form-control"
+                            asp-items="@(new SelectList(Model.Solucoes,"IdSolucao","DescricaoSolução"))">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="float-right">
+            <a class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
+            <input id="salve" type="submit" value="Salvar" class="btn btn-outline-primary" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery.unobtrusive-ajax.js"></script>
+    
+
+    <script>
+        
+        //$(function () {
+        //    Success();
+        //});
+
+    </script>
+}

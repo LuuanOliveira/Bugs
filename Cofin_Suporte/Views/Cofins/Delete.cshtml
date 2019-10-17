@@ -1,0 +1,93 @@
+﻿@model Cofin_Suporte.Models.Cofin
+
+@{
+    ViewData["Title"] = "";
+}
+
+<h4>Bug</h4>
+<div class="alert alert-danger" role="alert">
+    <h6>Tem certeza de que deseja excluir?</h6>
+</div>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayName("Descrição Bug:")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Assunto:")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Assunto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Data Bug:")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Observação:")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Observacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("BackLog:")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdBacklogNavigation.DescricaoBacklog)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Categoria Bug:")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdCategoriaNavigation.DescricaoCategoria)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Tipo Bug:")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdTipoNavigation.DescricaoTipo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Solução Bug:")
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var v in Model.CofinSolucao)
+            {
+                @*@Html.Label(v.IdSolucaoNavigation.DescricaoSolução)<br />*@
+                if (Model.CofinSolucao.Where(x => x.IdSolucao == v.IdSolucao).Select(s => s.Check).FirstOrDefault())
+                {
+                    <span name="Solution[@v]" id="Solution[@v]" value="@v.Check"> </span>
+                    @Html.Label(v.IdSolucaoNavigation.DescricaoSolução)
+                }
+            }
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" asp-controller="Cofins"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-success="Del"
+          data-ajax-failure="Failure">
+        <div class="float-right">
+            <input type="hidden" asp-for="IdCofin" />
+            <a class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
+            <input type="submit" value="Excluir" class="btn btn-outline-danger" />
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery.unobtrusive-ajax.js"></script>
+
+}

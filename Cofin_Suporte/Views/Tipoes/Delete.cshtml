@@ -1,0 +1,29 @@
+﻿@model Cofin_Suporte.Models.Tipo
+
+@{
+    ViewData["Title"] = "";
+}
+
+<h4>Tipo</h4>
+<div class="alert alert-danger" role="alert">
+    <h6>Tem certeza de que deseja excluir?</h6>
+</div>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayName("Descrição Tipo:")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DescricaoTipo)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <div class="float-right">
+            <input type="hidden" asp-for="IdTipo" />
+            <a class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
+            <input type="submit" value="Excluir" class="btn btn-outline-danger" />
+        </div>
+    </form>
+</div>

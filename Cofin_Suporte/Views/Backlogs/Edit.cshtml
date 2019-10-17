@@ -1,0 +1,34 @@
+﻿@model Cofin_Suporte.Models.Backlog
+
+@{
+    ViewData["Title"] = "";
+}
+
+<h4>Backlog</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdBacklog" />
+            <div class="form-group">
+                <label class="control-label">Código</label>
+                <input asp-for="Codigo" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Descrição BackLog</label>
+                <input asp-for="DescricaoBacklog" class="form-control" />
+                <span asp-validation-for="DescricaoBacklog" class="text-danger"></span>
+            </div>
+            <div class="float-right">
+                <a class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-outline-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,22 @@
+﻿@model Cofin_Suporte.Models.Tipo
+
+@{
+    ViewData["Title"] = "";
+}
+
+<div>
+    <h4>Tipo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayName("Descrição Tipo:")
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DescricaoTipo)
+        </dd>
+    </dl>
+</div>
+<div class="float-right">
+    <a class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
+    <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@Model.IdTipo">Editar</a>
+</div>

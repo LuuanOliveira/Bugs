@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Cofin_Suporte.Models.Solucao>
+
+@{
+    ViewBag.Title = "";
+}
+
+<h2><i class="fas fa-cogs"></i> Solução</h2>
+<div class="row">
+    <p>
+        <a class="btn btn-outline-dark" asp-action="Create">Novo</a>
+    </p>
+</div>
+
+<div class="box box-solid row">
+    <table class="table table-striped">
+        <thead>
+            <tr class="table-active">
+                <th scope="row">#</th>
+                <th>
+                    @Html.DisplayName("Descrição")
+                </th>
+                <th>
+                    @Html.DisplayName("Opções")
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @{
+                var i = 1;
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DescricaoSolução)
+                        </td>
+                        @*<td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.IdSolucao }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.IdSolucao }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.IdSolucao })
+                            </td>*@
+                        <td>
+                            <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.IdSolucao">Editar</a>
+                            <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.IdSolucao">Exibir</a>
+                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.IdSolucao">Excluir</a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            }
+        </tbody>
+    </table>
+</div>

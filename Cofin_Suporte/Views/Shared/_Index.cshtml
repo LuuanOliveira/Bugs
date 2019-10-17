@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Cofin>
+
+
+<div class="box box-solid row">
+    <table class="table table-striped">
+        <thead>
+            <tr class="table-active">
+                <th scope="row">#</th>
+
+                <th scope="col">
+                    @Html.DisplayName("Backlog")
+                </th>
+
+                <th scope="col">
+                    @Html.DisplayName("Categoria")
+                </th>
+
+                <th scope="col">
+                    @Html.DisplayName("Tipo")
+                </th>
+
+                <th scope="col">
+                    @Html.DisplayName("Descrição")
+                </th>
+
+                <th scope="col">
+                    @Html.DisplayName("Assunto")
+                </th>
+
+                <th scope="col">
+                    @Html.DisplayName("Data")
+                </th>
+
+                <th scope="col">
+                    @Html.DisplayName("Observação")
+                </th>
+                <th scope="col">
+                    @Html.DisplayName("Solução")
+                </th>
+                <th>
+                    @Html.DisplayName("Opções")
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                var i = 1;
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdBacklogNavigation.DescricaoBacklog)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.DescricaoCategoria)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdTipoNavigation.DescricaoTipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Assunto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Observacao)
+                        </td>
+                        <td>
+                            @foreach (var v in item.CofinSolucao.Where(q => q.Check == true))
+                            {
+                                @Html.Label(v.IdSolucaoNavigation.DescricaoSolução)<br />
+                            }
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdCofin">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.IdCofin">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdCofin">Delete</a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            }
+        </tbody>
+    </table>
+</div>

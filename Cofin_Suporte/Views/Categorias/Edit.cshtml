@@ -1,0 +1,29 @@
+﻿@model Cofin_Suporte.Models.Categoria
+
+@{
+    ViewData["Title"] = "";
+}
+
+<h4>Categoria</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdCategoria" />
+            <div class="form-group">
+                <label class="control-label">Descrição Categoria</label>
+                <input asp-for="DescricaoCategoria" class="form-control" />
+                <span asp-validation-for="DescricaoCategoria" class="text-danger"></span>
+            </div>
+            <div class="float-right">
+                <a class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-outline-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,123 @@
+﻿@model Cofin_Suporte.Models.Cofin
+
+@{
+    ViewData["Title"] = "";
+}
+
+<h4>Bug</h4>
+<hr />
+<div>
+    <form asp-action="Edit" asp-controller="Cofins"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-success="Edit"
+          data-ajax-failure="Failure">
+        <div class="col-md-12">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdCofin" />
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Descrição Bug</label>
+                    <input asp-for="Descricao" class="form-control" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Assunto</label>
+                    <input asp-for="Assunto" class="form-control" />
+                    <span asp-validation-for="Assunto" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Data Bug</label>
+                    <input asp-for="Data" class="form-control" />
+                    <span asp-validation-for="Data" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Observação</label>
+                    <input asp-for="Observacao" class="form-control" />
+                    <span asp-validation-for="Observacao" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Tipo Bug</label>
+                    <select asp-for="IdTipo" class="form-control" asp-items="ViewBag.IdTipo"></select>
+                    <span asp-validation-for="IdTipo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Categoria Bug</label>
+                    <select asp-for="IdCategoria" class="form-control" asp-items="ViewBag.IdCategoria"></select>
+                    <span asp-validation-for="IdCategoria" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">BackLog</label>
+                    <select asp-for="IdBacklog" class="form-control" asp-items="ViewBag.IdBacklog"></select>
+                    <span asp-validation-for="IdBacklog" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Solução Bug - (Ctrl + Click)</label>
+                    <br>
+                    <select asp-for="Solution" class="form-control">
+                        @{
+                            var i = 0;
+                            foreach (var item in Model.Solucoes)
+                            {
+                                if (Model.CofinSolucao.Where(x => x.IdSolucao == item.IdSolucao).Select(s => s.Check).FirstOrDefault())
+                                {
+                                    <option name="Solution[@i]" id="IdSolucao[@i]" value="@item.IdSolucao" selected>
+                                        @Html.Label(item.DescricaoSolução)
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option name="Solution[@i]" id="IdSolucao[@i]" value="@item.IdSolucao">
+                                        @Html.Label(item.DescricaoSolução)
+                                    </option>
+                                }
+                                i++;
+                            }
+                        }
+                    </select>
+
+                    @*@{var i = 0;
+                            foreach (var item in Model.CofinSolucao)
+                            {
+                                if (Model.CofinSolucao.Where(x => x.IdSolucao == item.IdSolucao).Select(s => s.Check).FirstOrDefault())
+                                {
+                                    <input type="checkbox" name="Solution[@i]" id="Solution[@i]" value="@item.Check" checked />
+                                    @Html.Label(item.IdSolucaoNavigation.DescricaoSolução)
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="Solution[@i]" id="Solution[@i]" value="@item.IdSolucao" />
+                                    @Html.Label(item.IdSolucaoNavigation.DescricaoSolução)
+                                }
+
+                                i++;
+                            }
+                        }*@
+                </div>
+            </div>
+        </div>
+        <div class="float-right">
+            <a class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
+            <input type="submit" value="Salvar" class="btn btn-outline-primary" />
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery.unobtrusive-ajax.js"></script>
+
+    <script>
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+        }
+    </script>
+
+}

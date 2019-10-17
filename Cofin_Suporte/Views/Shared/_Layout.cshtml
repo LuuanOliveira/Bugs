@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="~/css/pmesp.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]Suporte</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/css/toastr.css" rel="stylesheet" />
+        <link href="~/css/toastr.min.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="~/css/toastr.css" rel="stylesheet" />
+    <link href="~/css/toastr.min.css" rel="stylesheet" />
+</head>
+<body>
+    <style>
+        .imagem {
+            width: 180px;
+            height: 40px;
+        }
+
+        .color {
+            background-color: #3C8DBC;
+        }
+    </style>
+    <header>
+        <nav class=" navbar navbar-dark color navbar-expand-md">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="navbar-brand" href="~/Cofins/Index">
+                            <img src="~/css/Logo_transparente.png" class="imagem" width="30" height="30" alt="">
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link btn" href="~/Cofins/Index">@*<i class="fas fa-bug"></i>*@ Bugs</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link btn" href="~/Categorias/Index">@*<i class="fas fa-equals"></i>*@ Categorias</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link btn" href="~/Tipoes/Index">@*<i class="fas fa-paste"></i>*@ Tipos</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link btn" href="~/Backlogs/Index">@*<i class="fas fa-pencil-alt"></i>*@ Backlog</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link btn" href="~/Solucaos/Index">@*<i class="fas fa-cogs"></i>*@ Solução</a>
+                    </li>
+                </ul>
+                <partial name="_Buscar" />
+            </div>
+        </nav>
+
+    </header>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    @*<nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#">Anterior</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Próximo</a>
+                </li>
+            </ul>
+        </nav>*@
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <center>
+                <strong>
+                    Copyright &copy; 2019 <a target="_blank" href="http://intranet.policiamilitar.sp.gov.br/">
+                        <img src="~/css/pmesp.png" width="30" height="30"> Polícia Militar do Estado de São Paulo
+                    </a>All Rights.
+                </strong>
+            </center>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+    </environment>
+    <script src="~/js/toastr.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+    @section Scripts {
+
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script>
+            var onSuccess = function (data) {
+                $('#result').html(data);
+            };
+
+            var onFailed = function () {
+                $('#result').html("<p>Falha na busca</p>");
+            };
+        </script>
+    }
+</body>
+</html>
+
+@*@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}*@

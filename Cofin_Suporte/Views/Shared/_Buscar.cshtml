@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "";
+}
+<form asp-controller="Cofin" asp-action="Index"
+      data-ajax-failure="onFailed" data-ajax-success="onSuccess"
+      data-ajax="true" data-ajax-method="GET" class="form-inline my-2 my-lg-0">
+
+    <input class="filtro" id="filtro" name="filtro" type="text" autocomplete="off">
+    <button class="botao" id="botao" name="botao" title="Buscar" type="submit"><i class="fas fa-search"></i></button>
+</form>
+<style>
+    .botao {
+        color: white;
+        font-weight: bold;
+        padding: 0 5px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        font-size: 1.5em;
+        background-color: black;
+        border: solid 1px black;
+        -webkit-border-radius: 0 5px 5px 0;
+        -moz-border-radius: 0 5px 5px 0;
+        border-radius: 0 5px 5px 0;
+    }
+
+    .filtro {
+        border-radius: 5px 0px 0px 5px;
+        width: 500px;
+        height: 40px;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('#filtro').keyup(function () {
+                this.value = this.value.toUpperCase();
+            });
+        });
+
+        var onSuccess = function (data) {
+            $('#result').html(data);
+        };
+
+        var onFailed = function () {
+            $('#result').html("<p>Falha na busca</p>");
+        };
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
